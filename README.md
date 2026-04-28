@@ -1,22 +1,21 @@
 # Portfolio - Nhập môn Công nghệ số và Trí tuệ nhân tạo
 
 ![Portfolio Preview](/public/screenshot.png) 
-*(Bạn có thể thay thế hình ảnh preview bằng ảnh chụp màn hình dự án thực tế)*
 
 Đây là một trang web portfolio cá nhân được xây dựng để lưu trữ và chia sẻ quá trình học tập, các dự án và bài tập trong học phần **Nhập môn công nghệ số và trí tuệ nhân tạo**.
 
-## 👨‍🎓 Thông tin sinh viên
+## Thông tin sinh viên
 - **Họ và tên:** Tạ Hữu Cường
 - **Mã sinh viên (MSV):** 25020053
 - **Chuyên ngành:** Công nghệ thông tin (CNTT)
 - **Trường:** Đại học Công Nghệ - Đại học Quốc gia Hà Nội (UET - VNU)
 
-## 🎯 Mục tiêu dự án
+## Mục tiêu dự án
 - Thể hiện kỹ năng số đã học và tổng hợp kiến thức một cách hệ thống.
 - Tạo ra một hồ sơ năng lực (portfolio) trực tuyến để lưu trữ, giới thiệu bản thân và chia sẻ hành trình phát triển cá nhân.
 - Xây dựng trải nghiệm người dùng hiện đại, tối ưu cho cả giao diện máy tính và thiết bị di động.
 
-## 🚀 Công nghệ sử dụng
+## Công nghệ sử dụng
 Dự án được xây dựng dựa trên các công nghệ web hiện đại:
 - **[React 19](https://react.dev/)**: Thư viện JavaScript để xây dựng giao diện người dùng.
 - **[Vite](https://vitejs.dev/)**: Công cụ build siêu tốc độ dành cho web hiện đại.
@@ -25,7 +24,7 @@ Dự án được xây dựng dựa trên các công nghệ web hiện đại:
 - **[React Router v7](https://reactrouter.com/)**: Quản lý điều hướng (routing) trong ứng dụng Single Page Application (SPA).
 - **[Lucide React](https://lucide.dev/)**: Thư viện cung cấp các icon SVG đẹp và nhẹ.
 
-## 🛠️ Hướng dẫn cài đặt và chạy cục bộ (Run Locally)
+## Hướng dẫn cài đặt và chạy cục bộ (Run Locally)
 
 **Yêu cầu hệ thống:** Đã cài đặt [Node.js](https://nodejs.org/) (phiên bản 18+ được khuyến nghị).
 
@@ -52,11 +51,11 @@ Dự án được xây dựng dựa trên các công nghệ web hiện đại:
    ```
    Thư mục `dist/` sẽ được tạo ra, chứa các file tĩnh đã được tối ưu hóa sẵn sàng để deploy lên Vercel, Netlify, GitHub Pages, v.v.
 
-## 📁 Cấu trúc thư mục chính
+## Cấu trúc thư mục chính
 - `/src/components`: Chứa các component có thể tái sử dụng (như Layout, Navigation, ParticleBackground, v.v.).
 - `/src/pages`: Chứa các trang chính của ứng dụng (như trang Home, chi tiết Project).
 - `/src/data`: Chứa dữ liệu tĩnh mô phỏng cho các dự án/bài tập (`projects.ts`).
 - `/src/lib`: Chứa các hàm tiện ích hỗ trợ.
 
-## 📝 Giấy phép (License)
+## Giấy phép (License)
 Dự án này phục vụ mục đích học tập. Mọi cá nhân đều có thể tham khảo.
