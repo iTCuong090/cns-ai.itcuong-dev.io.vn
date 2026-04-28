@@ -9,8 +9,8 @@ export function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="w-full max-w-7xl mx-auto px-4 py-32 text-center">
-        <h2 className="text-3xl font-bold mb-4">Không tìm thấy dự án</h2>
+      <div className="w-full max-w-7xl mx-auto px-4 py-20 sm:py-32 text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4">Không tìm thấy dự án</h2>
         <p className="mb-8 text-slate-500">Dự án bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.</p>
         <Link to="/" className="text-blue-600 hover:underline">Quay lại trang chủ</Link>
       </div>
@@ -18,9 +18,9 @@ export function ProjectDetail() {
   }
 
   return (
-    <div className="w-full bg-white min-h-screen pb-24">
+    <div className="w-full bg-white min-h-screen pb-16 sm:pb-24">
       {/* Hero Section */}
-      <div className="relative h-[40vh] min-h-[300px] w-full bg-blue-50 rounded-b-[3rem] overflow-hidden border-b border-blue-100">
+      <div className="relative h-[30vh] sm:h-[40vh] min-h-[220px] sm:min-h-[300px] w-full bg-blue-50 rounded-b-[1.5rem] sm:rounded-b-[3rem] overflow-hidden border-b border-blue-100">
         {project.imageUrl && (
           <img 
             src={project.imageUrl} 
@@ -29,14 +29,14 @@ export function ProjectDetail() {
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-blue-50 via-blue-50/60 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 max-w-7xl mx-auto">
-          <Link to="/#du-an" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-6 transition-colors font-medium">
+        <div className="absolute bottom-0 left-0 w-full p-5 sm:p-8 md:p-16 max-w-7xl mx-auto">
+          <Link to="/#du-an" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-3 sm:mb-6 transition-colors font-medium text-sm sm:text-base">
             <ArrowLeft className="w-4 h-4" /> Quay lại danh sách
           </Link>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl md:text-5xl font-bold text-slate-900 max-w-4xl"
+            className="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-900 max-w-4xl"
           >
             {project.title}
           </motion.h1>
@@ -44,14 +44,14 @@ export function ProjectDetail() {
       </div>
 
       {/* Content Section */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 mt-16 space-y-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 mt-10 sm:mt-16 space-y-10 sm:space-y-16">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <h2 className="text-2xl font-bold text-slate-900 border-b pb-4 mb-6">Mô tả chung</h2>
-          <p className="text-lg text-slate-700 leading-relaxed font-light">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 sm:pb-4 mb-4 sm:mb-6">Mô tả chung</h2>
+          <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-light">
             {project.fullDescription}
           </p>
         </motion.div>
@@ -60,15 +60,15 @@ export function ProjectDetail() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100"
+          className="bg-blue-50/50 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-blue-100"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <Target className="w-6 h-6 text-blue-600" />
-            <h2 className="text-2xl font-bold text-slate-900">Mục tiêu bài tập</h2>
+          <div className="flex items-center gap-3 mb-4 sm:mb-6">
+            <Target className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Mục tiêu bài tập</h2>
           </div>
-          <ul className="space-y-4">
+          <ul className="space-y-3 sm:space-y-4">
             {project.objectives.map((obj, i) => (
-              <li key={i} className="flex items-start gap-3 text-slate-700">
+              <li key={i} className="flex items-start gap-3 text-slate-700 text-sm sm:text-base">
                 <CheckCircle2 className="w-5 h-5 text-blue-500 mt-0.5 shrink-0" />
                 <span>{obj}</span>
               </li>
@@ -81,8 +81,8 @@ export function ProjectDetail() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h2 className="text-2xl font-bold text-slate-900 border-b pb-4 mb-6">Quá trình thực hiện</h2>
-          <p className="text-slate-700 leading-relaxed">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 sm:pb-4 mb-4 sm:mb-6">Quá trình thực hiện</h2>
+          <p className="text-slate-700 leading-relaxed text-sm sm:text-base">
             {project.process}
           </p>
         </motion.div>
@@ -91,15 +91,15 @@ export function ProjectDetail() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-slate-50 p-8 rounded-3xl border border-slate-200 text-center"
+          className="bg-slate-50 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 text-center"
         >
-          <FileText className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-slate-900 mb-2">Đính kèm sản phẩm</h3>
-          <p className="text-slate-500 mb-6">{project.resultType}</p>
-          <button className="px-6 py-3 bg-slate-900 text-white font-medium rounded-full hover:bg-slate-800 transition-colors shadow-sm">
+          <FileText className="w-10 h-10 sm:w-12 sm:h-12 text-slate-400 mx-auto mb-3 sm:mb-4" />
+          <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">Đính kèm sản phẩm</h3>
+          <p className="text-slate-500 mb-4 sm:mb-6 text-sm sm:text-base">{project.resultType}</p>
+          <button className="px-5 sm:px-6 py-2.5 sm:py-3 bg-slate-900 text-white font-medium rounded-full hover:bg-slate-800 active:bg-slate-700 transition-colors shadow-sm text-sm sm:text-base">
             Xem sản phẩm chi tiết
           </button>
-          <p className="text-xs text-slate-400 mt-4">* Đây là nút giả lập để hoàn thiện giao diện landing page.</p>
+          <p className="text-xs text-slate-400 mt-3 sm:mt-4">* Đây là nút giả lập để hoàn thiện giao diện landing page.</p>
         </motion.div>
       </div>
     </div>
