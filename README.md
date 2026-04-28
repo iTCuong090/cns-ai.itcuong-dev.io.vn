@@ -1,6 +1,6 @@
 # Portfolio - Nhập môn Công nghệ số và Trí tuệ nhân tạo
 
-![Portfolio Preview](/public/avatar.jpg) 
+![Portfolio Preview](/public/screenshot.png) 
 *(Bạn có thể thay thế hình ảnh preview bằng ảnh chụp màn hình dự án thực tế)*
 
 Đây là một trang web portfolio cá nhân được xây dựng để lưu trữ và chia sẻ quá trình học tập, các dự án và bài tập trong học phần **Nhập môn công nghệ số và trí tuệ nhân tạo**.
