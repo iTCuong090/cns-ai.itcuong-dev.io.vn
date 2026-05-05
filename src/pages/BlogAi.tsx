@@ -35,7 +35,7 @@ export function BlogAi() {
               {/* Subtitle Placeholder */}
               <p className="text-lg text-slate-200 max-w-lg leading-relaxed drop-shadow">
                 {/* User will add text/image here */}
-                Ứng dụng trí tuệ nhân tạo để tăng tốc lập trình, nâng cao chất lượng và tối ưu quy trình phát triển phần mềm.
+                Khám phá cách AI thay đổi quy trình phát triển phần mềm hiện đại và các công cụ hàng đầu dành cho lập trình viên.
               </p>
 
               {/* Button Placeholder */}
@@ -70,7 +70,7 @@ export function BlogAi() {
                 AI & DEVELOPMENT
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                AI trong phát triển phần mềm: Xu hướng tất yếu của tương lai
+                AI trong phát triển phần mềm: Xu hướng và ứng dụng thực tiễn năm 2026
               </h2>
 
               <div className="flex flex-wrap items-center text-sm text-slate-500 gap-6">
@@ -80,7 +80,7 @@ export function BlogAi() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  <span>5 Tháng 5, 2026</span>
+                  <span>6 Tháng 5, 2026</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
@@ -89,7 +89,7 @@ export function BlogAi() {
               </div>
             </div>
 
-            {/* Main Article Image */}
+            {/* Minh họa 1 */}
             <div className="w-full aspect-[16/9] bg-slate-100 rounded-2xl mb-10 overflow-hidden border border-slate-200 shadow-sm">
               <img src="/blog-main-image.png" alt="AI in Software Development" className="w-full h-full object-cover" />
             </div>
@@ -97,79 +97,113 @@ export function BlogAi() {
             {/* Article Content */}
             <div className="max-w-none">
               <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                Trí tuệ nhân tạo (AI) đang thay đổi cách các nhà phát triển viết code, kiểm thử, triển khai và bảo trì phần mềm. Từ các công cụ hỗ trợ viết code thông minh đến khả năng tự động hóa kiểm thử và phân tích dữ liệu, AI đang trở thành trợ thủ đắc lực giúp developer làm việc nhanh hơn, chính xác hơn và sáng tạo hơn.
+                Chào các bạn, trí tuệ nhân tạo (AI) đang tiến những bước dài và thay đổi hoàn toàn bức tranh của ngành công nghiệp phần mềm. Nếu như cách đây vài năm, AI trong lập trình chỉ dừng lại ở mức "gợi ý vài từ khóa" (autocomplete) cơ bản, thì bước sang năm 2026, AI đã thực sự trở thành một "pair-programmer" đắc lực, đồng hành cùng chúng ta từ bước lên ý tưởng cho đến khi sản phẩm đến tay người dùng.
               </p>
 
               <p className="text-slate-700 text-lg leading-relaxed mb-8">
-                Năm 2026 đánh dấu một bước ngoặt lớn khi AI không chỉ còn là "người gợi ý" mà đã thực sự trở thành một "pair-programmer" đáng tin cậy. Hãy nhìn vào bức tranh toàn cảnh dưới đây để thấy AI đang tham gia vào mọi giai đoạn của vòng đời phát triển phần mềm (SDLC): từ lúc lên ý tưởng, viết code, kiểm thử cho đến khi triển khai lên server.
+                Trong bài viết này, mình sẽ chia sẻ với các bạn những góc nhìn thực tế về cách AI đang thay đổi quy trình phát triển phần mềm, điểm qua những công cụ AI hàng đầu hiện nay, và đặc biệt là những kinh nghiệm "xương máu" của mình khi áp dụng AI vào các dự án thực tế.
               </p>
 
-              {/* Workflow Image Section */}
+              <h3 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
+                1. AI thay đổi quy trình phát triển phần mềm như thế nào?
+              </h3>
+              <p className="text-slate-700 text-lg leading-relaxed mb-4">
+                Trước đây, quy trình phát triển phần mềm (SDLC) thường là một chuỗi các công việc nối tiếp nhau, đòi hỏi nhiều nhân lực và thời gian. Hiện tại, sự can thiệp của AI đã tối ưu hóa mọi công đoạn. Theo một báo cáo từ Gartner đầu năm 2026, các tổ chức áp dụng AI toàn diện vào SDLC đã giảm trung bình 40% thời gian time-to-market.
+              </p>
+
+              {/* Minh họa 2: Workflow */}
               <div className="my-12">
                 <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-sm">
-                  {/* Nhớ lưu ảnh bạn vừa gửi vào thư mục public với tên ai-workflow.png nhé */}
                   <img src="/ai-workflow.png" alt="AI Software Development Workflow" className="w-full h-auto rounded-xl" />
                 </div>
                 <p className="text-center text-sm text-slate-500 mt-4 italic">
-                  Quy trình phát triển phần mềm hiện đại với sự hỗ trợ của AI: Ý tưởng ➔ Code ➔ Kiểm thử ➔ Triển khai
+                  Hình 1: Quy trình phát triển phần mềm hiện đại với sự hỗ trợ của AI
                 </p>
               </div>
 
-              <h3 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
-                1. Từ ý tưởng đến Code: AI hỗ trợ thông minh hơn
-              </h3>
-              <p className="text-slate-700 text-lg leading-relaxed mb-4">
-                Các công cụ như GitHub Copilot, Tabnine hay Amazon CodeWhisperer nay đã tiến hóa với các mô hình ngôn ngữ lớn (LLMs) được tối ưu riêng cho lập trình. Chúng không chỉ gợi ý từng dòng code mà có thể sinh ra toàn bộ các hàm chức năng, các component dựa trên prompt (mô tả) bằng ngôn ngữ tự nhiên.
-              </p>
               <ul className="list-disc pl-6 space-y-2 text-slate-700 text-lg mb-8 marker:text-blue-500">
-                <li><strong className="text-slate-900">Gợi ý theo ngữ cảnh:</strong> AI hiểu được toàn bộ project structure chứ không chỉ file hiện tại.</li>
-                <li><strong className="text-slate-900">Chuyển đổi ngôn ngữ:</strong> Dễ dàng dịch một module từ Python sang TypeScript chỉ trong vài giây.</li>
-                <li><strong className="text-slate-900">Giải thích code:</strong> Phân tích và tạo document tự động cho các legacy code (code cũ) phức tạp.</li>
+                <li><strong className="text-slate-900">Khởi tạo và thiết kế:</strong> AI phân tích yêu cầu từ khách hàng và tự động tạo ra kiến trúc hệ thống sơ bộ (system architecture) hoặc đề xuất các mẫu thiết kế (design patterns) tối ưu.</li>
+                <li><strong className="text-slate-900">Viết mã (Coding):</strong> Không chỉ sinh code, AI có thể tái cấu trúc (refactor) đoạn code rối rắm thành code sạch, viết document tự động, và thậm chí chuyển đổi nguyên một module từ ngôn ngữ này sang ngôn ngữ khác.</li>
+                <li><strong className="text-slate-900">Kiểm thử (Testing):</strong> AI có khả năng tự động đọc hiểu luồng logic của hệ thống để sinh ra hàng ngàn unit tests, bao phủ các edge cases mà lập trình viên dễ bỏ sót.</li>
               </ul>
 
               <h3 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
-                2. Tự động hóa kiểm thử và phát hiện lỗi
+                2. Các công cụ AI hàng đầu cho lập trình viên năm 2026
               </h3>
               <p className="text-slate-700 text-lg leading-relaxed mb-4">
-                Việc viết unit test thường bị coi là công việc nhàm chán đối với nhiều developer. Hiện nay, AI có thể tự động đọc luồng xử lý của hàm và sinh ra các kịch bản test (test cases) bao phủ các trường hợp ngoại lệ (edge cases) mà con người có thể bỏ sót.
+                Thị trường công cụ AI hỗ trợ lập trình đang bùng nổ. Dưới đây là những "trợ thủ" mà theo đánh giá của mình là đáng giá nhất ở thời điểm hiện tại:
               </p>
-              <div className="bg-slate-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg">
-                <p className="text-slate-700 italic text-lg m-0">
-                  "Theo một khảo sát gần đây, các team áp dụng AI vào quy trình QA (Quality Assurance) đã giảm tới 45% thời gian fix bug trước khi release."
+
+              {/* Minh họa 3: AI Tools Ecosystem */}
+              <div className="my-10">
+                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-sm">
+                  <img src="/ai-tools-ecosystem.png" alt="AI Tools for Developers" className="w-full h-auto rounded-xl" />
+                </div>
+                <p className="text-center text-sm text-slate-500 mt-4 italic">
+                  Hình 2: Hệ sinh thái các công cụ AI dành cho lập trình viên
                 </p>
               </div>
 
+              <div className="space-y-6 mb-10">
+                <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <h4 className="text-xl font-bold text-blue-600 mb-2">GitHub Copilot & Cursor IDE</h4>
+                  <p className="text-slate-700">Đây vẫn là combo vô đối. Đặc biệt, Cursor IDE với tính năng tích hợp trực tiếp Claude 3.5 Sonnet và GPT-4o giúp việc hiểu toàn bộ codebase trở nên dễ dàng hơn bao giờ hết.</p>
+                </div>
+                <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <h4 className="text-xl font-bold text-blue-600 mb-2">Google Gemini (AI Studio)</h4>
+                  <p className="text-slate-700">Với context window khổng lồ lên tới hàng triệu token, Gemini là lựa chọn số một khi mình cần nạp toàn bộ log lỗi hoặc tài liệu API dài hàng trăm trang để phân tích nguyên nhân gốc rễ (root cause) của một bug phức tạp.</p>
+                </div>
+                <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <h4 className="text-xl font-bold text-blue-600 mb-2">Vercel v0 & Google Stitch</h4>
+                  <p className="text-slate-700">Trong lĩnh vực Frontend, các công cụ sinh giao diện trực tiếp từ prompt đang thay đổi luật chơi. Nhập một mô tả text, và bạn có ngay một component React với CSS hoàn chỉnh.</p>
+                </div>
+              </div>
+
               <h3 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
-                3. Tối ưu hóa quy trình DevOps và CI/CD
+                3. Kinh nghiệm cá nhân: Thực tế không chỉ có màu hồng
               </h3>
               <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                Trong vận hành hệ thống, AI Operations (AIOps) đang dần thay thế các cấu hình thủ công. AI liên tục giám sát log, số liệu hệ thống và dự đoán các sự cố (ví dụ: cạn kiệt bộ nhớ hoặc nghẽn băng thông) trước khi chúng ảnh hưởng đến người dùng, tự động scale hệ thống một cách thông minh.
+                Khi sử dụng AI trong các dự án cá nhân và công ty, mình nhận thấy năng suất thực sự tăng lên đáng kể. Mình tốn ít thời gian hơn cho các task boilerplate và có nhiều thời gian hơn để suy nghĩ về kiến trúc hệ thống.
+              </p>
+              <div className="bg-slate-50 border-l-4 border-amber-500 p-6 my-8 rounded-r-lg">
+                <p className="text-slate-700 italic text-lg m-0">
+                  "Tuy nhiên, cạm bẫy lớn nhất khi làm việc với AI là hội chứng ảo giác (hallucination). Rất nhiều lần AI đã tự tin đề xuất cho mình một đoạn code dùng hàm của thư viện... không hề tồn tại!"
+                </p>
+              </div>
+              <p className="text-slate-700 text-lg leading-relaxed mb-6">
+                Bài học rút ra là: <strong className="text-slate-900">Never trust, always verify</strong> (Không bao giờ tin tưởng tuyệt đối, luôn luôn kiểm chứng). AI giống như một cậu thực tập sinh siêu việt: viết code cực nhanh, làm việc 24/7 không biết mệt mỏi, nhưng lại thiếu kinh nghiệm và thường xuyên "chém gió". Bạn, với vai trò là một Senior/Lead, phải luôn là người review cuối cùng đoạn code đó có tối ưu, có an toàn bảo mật hay không.
               </p>
 
               <h3 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
-                4. Thách thức và góc nhìn thực tế
+                4. Tương lai của nghề lập trình và Đạo đức AI
               </h3>
               <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                Tuy nhiên, AI không thay thế con người. Mã nguồn do AI sinh ra đôi khi gặp lỗi logic ngầm hoặc sử dụng các thư viện có lỗ hổng bảo mật. Vai trò của Developer đang dịch chuyển từ việc "gõ code" sang "kiến trúc sư và người kiểm duyệt" - định hướng cho AI và đánh giá chất lượng kết quả đầu ra.
+                AI sẽ không thay thế lập trình viên, nhưng lập trình viên biết sử dụng AI sẽ thay thế những người không biết. Tuy nhiên, việc lạm dụng AI cũng đặt ra những vấn đề đạo đức như tính minh bạch (đoạn code này do ai viết?), vấn đề bản quyền trí tuệ và nguy cơ xuất hiện bias từ dữ liệu huấn luyện của AI.
+              </p>
+              <p className="text-slate-700 text-lg leading-relaxed mb-6">
+                Kỹ năng cốt lõi của chúng ta trong những năm tới sẽ dần dịch chuyển. Thay vì chỉ tập trung vào cú pháp ngôn ngữ lập trình, chúng ta sẽ cần rèn luyện kỹ năng phân tích vấn đề, thiết kế hệ thống, và đặc biệt là <strong className="text-slate-900">Prompt Engineering</strong>.
               </p>
 
               {/* Lời kết */}
               <h3 className="text-xl font-bold text-slate-900 mt-10 mb-4">Lời kết</h3>
               <p className="text-slate-700 text-lg leading-relaxed mb-10">
-                Sự kết hợp giữa tư duy sáng tạo của con người và tốc độ xử lý của AI chính là tương lai của ngành phát triển phần mềm. Nếu bạn chưa áp dụng các công cụ này vào workflow hàng ngày, đây là thời điểm tuyệt vời nhất để bắt đầu.
+                AI tạo sinh đang mở ra một kỷ nguyên mới cho sáng tạo và phát triển phần mềm, nơi con người và máy móc cộng tác để tạo ra những sản phẩm vượt xa khả năng của từng bên riêng lẻ. Chìa khóa nằm ở việc sử dụng AI như một đối tác sáng tạo chứ không phải người thay thế, và luôn duy trì tư duy phản biện.
+              </p>
+              <p className="text-slate-500 text-sm italic mb-10 border-t border-slate-200 pt-4">
+                *Lưu ý: Bài viết này được thực hiện với sự hỗ trợ của các công cụ AI tạo sinh (ChatGPT, Google Gemini, DALL-E, Google Stitch) trong quá trình lên ý tưởng, viết nội dung và thiết kế hình ảnh. Tuy nhiên, mọi quan điểm và trải nghiệm cá nhân đều là của tác giả.
               </p>
 
-              {/* Simplified Call To Action */}
-              <div className="mt-16 pt-10 border-t border-slate-200 text-center">
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">Bạn thấy bài viết này hữu ích?</h3>
+              {/* Call To Action theo phong cách cá nhân */}
+              <div className="mt-16 pt-10 border-t border-slate-200 text-center bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Cùng thảo luận thêm nhé!</h3>
                 <p className="text-slate-600 text-lg mb-8 max-w-xl mx-auto">
-                  Đừng bỏ lỡ những bài viết chuyên sâu về AI và công nghệ số. Hãy đăng ký nhận bản tin hàng tuần của chúng tôi.
+                  Bạn đang sử dụng công cụ AI nào trong workflow hàng ngày của mình? Có gặp khó khăn gì khi áp dụng không? Hãy để lại bình luận phía dưới hoặc đăng ký email để chúng ta cùng chia sẻ thêm trong những bài viết tới nhé!
                 </p>
                 <button
                   onClick={handleClick}
-                  className="px-10 py-3.5 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition-all duration-300 shadow-lg shadow-blue-500/20"
+                  className="px-8 py-3.5 rounded-xl bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all duration-300 shadow-lg shadow-slate-900/20"
                 >
-                  Đăng ký nhận bài viết mới
+                  Kết nối với mình
                 </button>
               </div>
             </div>
@@ -222,7 +256,7 @@ export function BlogAi() {
                     <h4 className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors text-sm line-clamp-2 mb-1.5">
                       10 công cụ AI giúp lập trình viên làm việc hiệu quả hơn
                     </h4>
-                    <p className="text-xs text-slate-500">10 Tháng 5, 2024</p>
+                    <p className="text-xs text-slate-500">10 Tháng 4, 2026</p>
                   </div>
                 </Link>
 
@@ -236,7 +270,7 @@ export function BlogAi() {
                     <h4 className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors text-sm line-clamp-2 mb-1.5">
                       Hướng dẫn tích hợp ChatGPT vào ứng dụng của bạn
                     </h4>
-                    <p className="text-xs text-slate-500">5 Tháng 5, 2024</p>
+                    <p className="text-xs text-slate-500">25 Tháng 4, 2026</p>
                   </div>
                 </Link>
 
@@ -250,7 +284,7 @@ export function BlogAi() {
                     <h4 className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors text-sm line-clamp-2 mb-1.5">
                       DevOps và AI: Bộ đôi hoàn hảo cho tương lai
                     </h4>
-                    <p className="text-xs text-slate-500">2 Tháng 5, 2024</p>
+                    <p className="text-xs text-slate-500">15 Tháng 4, 2026</p>
                   </div>
                 </Link>
               </div>
