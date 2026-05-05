@@ -28,6 +28,7 @@ export function Layout() {
     { href: "/#gioi-thieu", label: "Giới thiệu" },
     { href: "/#du-an", label: "Dự án" },
     { href: "/#tong-ket", label: "Tổng kết" },
+    { href: "/blog-ai", label: "Blog AI" },
   ];
 
   return (
@@ -45,9 +46,9 @@ export function Layout() {
           {/* Desktop navigation */}
           <nav className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
             {navLinks.map(link => (
-              <a key={link.href} href={link.href} className="hover:text-blue-700 transition-colors">
+              <Link key={link.href} to={link.href} className="hover:text-blue-700 transition-colors">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -77,14 +78,14 @@ export function Layout() {
         <div className="flex flex-col pt-20 px-6">
           <nav className="flex flex-col gap-1">
             {navLinks.map(link => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-slate-700 hover:text-blue-700 hover:bg-blue-50 active:bg-blue-100 transition-all"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
