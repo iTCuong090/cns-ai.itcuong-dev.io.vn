@@ -15,17 +15,43 @@ import {
   ClipboardList, 
   Check, 
   BookOpen, 
-  Info 
+  Info,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 const PDFViewerElement = "pdfjs-viewer-element" as any;
 
+function renderFormattedContent(htmlContent: string): React.ReactNode {
+  return (
+    <div 
+      className="project-process-html text-slate-650"
+      dangerouslySetInnerHTML={{ __html: htmlContent }} 
+    />
+  );
+}
+
 export function ProjectDetail() {
   const { id } = useParams();
   const project = projects.find(p => p.id === id);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
-  const [completedSteps, setCompletedSteps] = useState<Record<number, boolean>>({});
+  const [activeStepIdx, setActiveStepIdx] = useState(0);
+  const [isWalkthroughOpen, setIsWalkthroughOpen] = useState(false);
+
+  const isStepByStep = project?.id === "bai-1-may-tinh-va-cac-thiet-bi-ngoai-vi";
+
+  // Prevent body scroll when the full-screen viewer or walkthrough is open
+  useEffect(() => {
+    if (isViewerOpen || isWalkthroughOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isViewerOpen, isWalkthroughOpen]);
 
   // Load pdfjs-viewer-element custom element script dynamically
   useEffect(() => {
@@ -39,18 +65,6 @@ export function ProjectDetail() {
     }
   }, []);
 
-  // Prevent body scroll when the full-screen viewer is open
-  useEffect(() => {
-    if (isViewerOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isViewerOpen]);
-
   if (!project) {
     return (
       <div className="w-full max-w-7xl mx-auto px-4 py-20 sm:py-32 text-center animate-fade-in">
@@ -63,17 +77,26 @@ export function ProjectDetail() {
     );
   }
 
-  // Calculate progress for step list (Bài 1)
+  // Step list length (Bài 1)
   const totalSteps = project.steps?.length || 0;
-  const completedCount = Object.values(completedSteps).filter(Boolean).length;
-  const progressPercentage = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
 
-  const toggleStep = (idx: number) => {
-    setCompletedSteps(prev => ({
-      ...prev,
-      [idx]: !prev[idx]
-    }));
-  };
+  // Keyboard navigation for step-by-step walkthrough
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isWalkthroughOpen || totalSteps === 0) return;
+      if (e.key === "ArrowLeft") {
+        setActiveStepIdx(prev => Math.max(0, prev - 1));
+      } else if (e.key === "ArrowRight") {
+        setActiveStepIdx(prev => Math.min(totalSteps - 1, prev + 1));
+      } else if (e.key === "Escape") {
+        setIsWalkthroughOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isWalkthroughOpen, totalSteps]);
 
   return (
     <div className="w-full bg-slate-50 min-h-screen pb-16 sm:pb-24">
@@ -126,8 +149,7 @@ export function ProjectDetail() {
               transition={{ delay: 0.1 }}
               className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm"
             >
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-5 flex items-center gap-3">
-                <Info className="w-5.5 h-5.5 text-blue-600" />
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-5">
                 Tổng quan bài tập
               </h2>
               <p className="text-slate-700 leading-relaxed font-light text-base sm:text-lg">
@@ -142,14 +164,13 @@ export function ProjectDetail() {
               transition={{ delay: 0.2 }}
               className="bg-blue-50/50 p-6 sm:p-8 rounded-3xl border border-blue-100/80 shadow-sm"
             >
-              <div className="flex items-center gap-3 mb-5 border-b border-blue-100/50 pb-4">
-                <Target className="w-5.5 h-5.5 text-blue-600" />
+              <div className="mb-5 border-b border-blue-100/50 pb-4">
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Mục tiêu đạt được</h2>
               </div>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {project.objectives.map((obj, i) => (
                   <li key={i} className="flex items-start gap-3 text-slate-700 text-sm sm:text-base bg-white p-4 rounded-2xl border border-blue-100/30 shadow-2xs hover:shadow-xs transition-shadow">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />
                     <span className="font-light">{obj}</span>
                   </li>
                 ))}
@@ -164,70 +185,34 @@ export function ProjectDetail() {
                 transition={{ delay: 0.3 }}
                 className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm"
               >
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-6 flex items-center gap-3">
-                  <ClipboardList className="w-5.5 h-5.5 text-blue-600" />
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-6">
                   Yêu cầu chi tiết
                 </h2>
 
-                {/* Specific Layout for Bài 1: Interactive Stepper */}
+                {/* Specific Layout for Bài 1: Interactive Stepper & Other Exercises: Image Viewer */}
                 {project.steps && project.steps.length > 0 ? (
                   <div className="space-y-6">
-                    <p className="text-slate-600 text-sm italic mb-4">
-                      Bạn có thể tích chọn từng bước dưới đây để theo dõi tiến trình thực hành trực tiếp:
-                    </p>
-
-                    {/* Progress tracking bar */}
-                    <div className="bg-slate-50 border border-slate-200/60 rounded-2xl p-4 sm:p-5">
-                      <div className="flex justify-between items-center mb-3">
-                        <span className="text-xs sm:text-sm font-semibold text-slate-700">Tiến trình hoàn thành thao tác</span>
-                        <span className="text-xs sm:text-sm font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full">
-                          {completedCount}/{totalSteps} bước ({progressPercentage}%)
-                        </span>
+                    <div className="bg-slate-50 border border-slate-200/60 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                      <div className="space-y-2 text-center md:text-left">
+                        <h3 className="text-lg font-bold text-slate-800">
+                          {isStepByStep ? "Hướng dẫn thực hành chi tiết" : "Hình ảnh minh chứng thực tế"}
+                        </h3>
+                        <p className="text-slate-500 text-sm max-w-md leading-relaxed">
+                          {isStepByStep 
+                            ? `Bài thực hành gồm ${totalSteps} bước chi tiết kèm hình ảnh minh họa cho từng thao tác máy tính.`
+                            : `Dự án chứa ${totalSteps} hình ảnh chụp minh chứng hoạt động và kết quả thực tế.`}
+                        </p>
                       </div>
-                      <div className="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                        <div 
-                          className="bg-blue-600 h-full transition-all duration-500 ease-out" 
-                          style={{ width: `${progressPercentage}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Stepper Steps List */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {project.steps.map((step, idx) => {
-                        const isCompleted = !!completedSteps[idx];
-                        return (
-                          <div 
-                            key={idx}
-                            onClick={() => toggleStep(idx)}
-                            className={`flex items-start gap-4 p-4 rounded-2xl border transition-all duration-300 cursor-pointer select-none group ${
-                              isCompleted 
-                                ? 'bg-emerald-50/50 border-emerald-200 shadow-2xs' 
-                                : 'bg-slate-50/50 border-slate-200/80 hover:bg-white hover:border-blue-300 hover:shadow-xs'
-                            }`}
-                          >
-                            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 transition-all duration-300 ${
-                              isCompleted 
-                                ? 'bg-emerald-500 text-white' 
-                                : 'bg-white text-slate-500 border border-slate-300 group-hover:border-blue-400 group-hover:text-blue-600'
-                            }`}>
-                              {isCompleted ? <Check className="w-4 h-4" /> : idx + 1}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <h4 className={`text-sm sm:text-base font-bold transition-all duration-300 ${
-                                isCompleted ? 'text-emerald-800 line-through opacity-70' : 'text-slate-800'
-                              }`}>
-                                {step.title}
-                              </h4>
-                              <p className={`text-xs sm:text-sm mt-1 transition-all duration-300 leading-relaxed ${
-                                isCompleted ? 'text-emerald-600/80 line-through opacity-70' : 'text-slate-500'
-                              }`}>
-                                {step.desc}
-                              </p>
-                            </div>
-                          </div>
-                        );
-                      })}
+                      
+                      <button
+                        onClick={() => {
+                          setIsWalkthroughOpen(true);
+                          setActiveStepIdx(0);
+                        }}
+                        className="w-full md:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl transition-all duration-200 shadow-lg shadow-blue-500/20 hover:-translate-y-0.5 cursor-pointer text-sm sm:text-base shrink-0 animate-pulse hover:animate-none"
+                      >
+                        <Eye className="w-5 h-5" /> {isStepByStep ? "Bắt đầu xem từng bước" : "Xem ảnh minh chứng"}
+                      </button>
                     </div>
                   </div>
                 ) : (
@@ -253,13 +238,12 @@ export function ProjectDetail() {
               transition={{ delay: 0.4 }}
               className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm"
             >
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-5 flex items-center gap-3">
-                <BookOpen className="w-5.5 h-5.5 text-blue-600" />
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-5">
                 Quá trình thực hành & Đúc kết
               </h2>
-              <p className="text-slate-700 leading-relaxed font-light text-sm sm:text-base whitespace-pre-line">
-                {project.process}
-              </p>
+              <div className="text-slate-700 font-light space-y-4">
+                {renderFormattedContent(project.process)}
+              </div>
             </motion.div>
 
           </div>
@@ -322,8 +306,7 @@ export function ProjectDetail() {
               transition={{ delay: 0.4 }}
               className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6"
             >
-              <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2.5">
-                <Award className="w-5 h-5 text-blue-600" />
+              <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">
                 Thông tin bổ sung
               </h3>
 
@@ -422,6 +405,170 @@ export function ProjectDetail() {
                   style={{ width: "100%", height: "100%", border: "0" }}
                 />
               </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+
+      {/* Full-screen Step-by-Step Walkthrough Modal */}
+      {createPortal(
+        <AnimatePresence>
+          {isWalkthroughOpen && project.steps && project.steps[activeStepIdx] && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col justify-between"
+            >
+              {/* Header */}
+              <div className="bg-slate-900/80 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-800 shrink-0 z-50">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-500/10 text-blue-400 rounded-xl border border-blue-500/20">
+                    <ClipboardList className="w-5.5 h-5.5" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold text-sm sm:text-base leading-tight">
+                      {isStepByStep ? "Hướng dẫn từng bước thực hành" : "Album ảnh minh chứng thực tế"}
+                    </h3>
+                    <p className="text-slate-400 text-xs mt-0.5 truncate max-w-[200px] sm:max-w-md">
+                      {project.title}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setIsWalkthroughOpen(false)}
+                  className="p-2 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-full transition-all duration-200 cursor-pointer shadow-md"
+                  aria-label="Đóng trình xem"
+                >
+                  <X className="w-5.5 h-5.5" />
+                </button>
+              </div>
+
+              {/* Main screenshot viewport in the center */}
+              <div className="flex-1 flex items-center justify-between px-2 sm:px-6 md:px-12 relative overflow-hidden bg-slate-950">
+                {/* Left navigation arrow */}
+                <button
+                  disabled={activeStepIdx === 0}
+                  onClick={() => setActiveStepIdx(prev => prev - 1)}
+                  className="p-3 sm:p-4 rounded-full bg-slate-900/60 hover:bg-slate-800/80 text-white disabled:opacity-20 disabled:pointer-events-none transition-all duration-200 z-10 shadow-lg border border-slate-800 cursor-pointer"
+                  title="Bước trước"
+                >
+                  <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
+                </button>
+
+                {/* Screenshot Frame */}
+                <div className="flex-1 h-full flex flex-col items-center justify-center p-4 max-w-5xl mx-auto">
+                  <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[60vh] sm:max-h-[65vh]">
+                    {/* Window Title Bar Mock */}
+                    <div className="bg-slate-850 px-4 py-2.5 flex items-center justify-between shrink-0 border-b border-slate-800">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+                        <span className="text-slate-500 text-[10px] sm:text-xs font-mono ml-2 truncate max-w-[250px]">
+                          {project.steps[activeStepIdx].image?.split('/').pop() || 'screenshot.jpg'}
+                        </span>
+                      </div>
+                      <span className="text-slate-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider bg-slate-800 px-2 py-0.5 rounded">
+                        MINH CHỨNG THAO TÁC
+                      </span>
+                    </div>
+                    
+                    {/* Image Viewport */}
+                    <div className="flex-1 bg-slate-950 p-4 flex items-center justify-center overflow-hidden relative">
+                      <AnimatePresence mode="wait">
+                        {project.steps[activeStepIdx].image ? (
+                          <motion.img
+                            key={activeStepIdx}
+                            src={project.steps[activeStepIdx].image}
+                            alt={project.steps[activeStepIdx].title}
+                            initial={{ opacity: 0, scale: 0.98, x: 10 }}
+                            animate={{ opacity: 1, scale: 1, x: 0 }}
+                            exit={{ opacity: 0, scale: 0.98, x: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="max-w-full max-h-full object-contain rounded-lg shadow-md"
+                          />
+                        ) : (
+                          <div className="text-slate-500 text-sm">Không có ảnh minh họa cho bước này</div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right navigation arrow */}
+                <button
+                  disabled={activeStepIdx === totalSteps - 1}
+                  onClick={() => setActiveStepIdx(prev => prev + 1)}
+                  className="p-3 sm:p-4 rounded-full bg-slate-900/60 hover:bg-slate-800/80 text-white disabled:opacity-20 disabled:pointer-events-none transition-all duration-200 z-10 shadow-lg border border-slate-800 cursor-pointer"
+                  title="Bước tiếp theo"
+                >
+                  <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
+                </button>
+              </div>
+
+              {/* Bottom footer and step details panel */}
+              <div className="bg-slate-900 border-t border-slate-850 p-5 sm:p-6 shrink-0 z-50">
+                <div className="max-w-4xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-5">
+                  
+                  {/* Step text description */}
+                  <div className="flex-1 space-y-2">
+                    <div className="flex items-center gap-3">
+                      <span className="text-blue-400 text-xs sm:text-sm font-bold uppercase tracking-wider">
+                        {isStepByStep ? "Bước" : "Ảnh"} {activeStepIdx + 1} / {totalSteps}
+                      </span>
+                    </div>
+                    <h4 className="text-white font-extrabold text-base sm:text-lg leading-snug">
+                      {project.steps[activeStepIdx].title}
+                    </h4>
+                    <p className="text-slate-400 text-xs sm:text-sm font-light leading-relaxed">
+                      {project.steps[activeStepIdx].desc}
+                    </p>
+                  </div>
+
+                  {/* Right side controls (Prev/Next) */}
+                  <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-4 shrink-0 border-t border-slate-800/60 md:border-t-0 pt-4 md:pt-0">
+                    
+                    {/* Step navigation shortcut */}
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => setIsWalkthroughOpen(false)}
+                        className="px-4 py-2.5 rounded-xl text-slate-400 hover:text-white bg-slate-800/30 hover:bg-slate-800 hover:border-slate-700 text-xs sm:text-sm font-medium border border-transparent transition-all duration-200 cursor-pointer"
+                      >
+                        Thoát
+                      </button>
+                      
+                      {activeStepIdx > 0 ? (
+                        <button
+                          onClick={() => setActiveStepIdx(prev => prev - 1)}
+                          className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-white text-xs sm:text-sm font-semibold shadow-md border border-slate-700 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
+                        >
+                          {isStepByStep ? "Bước trước" : "Ảnh trước"}
+                        </button>
+                      ) : null}
+
+                      {activeStepIdx < totalSteps - 1 ? (
+                        <button
+                          onClick={() => setActiveStepIdx(prev => prev + 1)}
+                          className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-900/30 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
+                        >
+                          {isStepByStep ? "Bước tiếp theo" : "Ảnh tiếp theo"}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => setIsWalkthroughOpen(false)}
+                          className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold shadow-md shadow-emerald-900/30 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
+                        >
+                          {isStepByStep ? "Hoàn tất hướng dẫn" : "Hoàn tất xem ảnh"}
+                        </button>
+                      )}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>,
