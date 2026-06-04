@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Link } from "react-router-dom";
 import { User, Calendar, Clock, ThumbsUp, Globe, Github, Linkedin, Twitter } from "lucide-react";
 

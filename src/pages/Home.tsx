@@ -85,7 +85,7 @@ export function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white flex flex-col justify-end p-5 sm:p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all ${project.colSpan === 2 ? 'sm:col-span-2 lg:col-span-2' : 'col-span-1'
+                className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white flex flex-col justify-end p-5 sm:p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all cursor-pointer ${project.colSpan === 2 ? 'sm:col-span-2 lg:col-span-2' : 'col-span-1'
                   }`}
               >
                 {project.imageUrl && (
@@ -93,7 +93,7 @@ export function Home() {
                     <img
                       src={project.imageUrl}
                       alt={project.title}
-                      className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover opacity-[0.15] group-hover:opacity-25 transition-opacity duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent"></div>
                   </div>
@@ -111,7 +111,7 @@ export function Home() {
                   </p>
                   <Link
                     to={`/project/${project.id}`}
-                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 active:text-blue-800 transition-colors py-1"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 active:text-blue-800 transition-colors py-1 after:absolute after:inset-0 after:z-10"
                   >
                     Xem chi tiết <ArrowRight className="w-4 h-4" />
                   </Link>

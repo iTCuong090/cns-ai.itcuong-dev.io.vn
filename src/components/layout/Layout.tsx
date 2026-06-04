@@ -12,6 +12,27 @@ export function Layout() {
     setMobileMenuOpen(false);
   }, [location]);
 
+  // Scroll to top on route change, or scroll to hash if present
+  useEffect(() => {
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+    } else {
+      const id = location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      } else {
+        const timer = setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [location.pathname, location.hash, location.key]);
+
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
