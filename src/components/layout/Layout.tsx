@@ -48,7 +48,7 @@ export function Layout() {
   const navLinks = [
     { href: "/#gioi-thieu", label: "Giới thiệu" },
     { href: "/#du-an", label: "Dự án" },
-    { href: "/#tong-ket", label: "Tổng kết" },
+    { href: "/tong-ket", label: "Tổng kết" },
     { href: "/blog-ai", label: "Blog AI" },
   ];
 

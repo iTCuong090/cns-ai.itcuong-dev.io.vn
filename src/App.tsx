@@ -6,6 +6,7 @@ import { Layout } from "./components/layout/Layout";
 const Home = lazy(() => import("./pages/Home").then(m => ({ default: m.Home })));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail").then(m => ({ default: m.ProjectDetail })));
 const BlogAi = lazy(() => import("./pages/BlogAi").then(m => ({ default: m.BlogAi })));
+const Summary = lazy(() => import("./pages/Summary").then(m => ({ default: m.Summary })));
 
 // Simple loading indicator fallback
 const PageLoader = () => (
@@ -40,6 +41,14 @@ export default function App() {
             element={
               <Suspense fallback={<PageLoader />}>
                 <BlogAi />
+              </Suspense>
+            }
+          />
+          <Route
+            path="tong-ket"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Summary />
               </Suspense>
             }
           />

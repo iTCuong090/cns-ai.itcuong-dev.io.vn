@@ -124,50 +124,43 @@ export function Home() {
 
       {/* 3. Phần Tổng Kết */}
       <section id="tong-ket" className="scroll-mt-14 sm:scroll-mt-16 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6">Trải nghiệm & Cảm nhận</h2>
-          <p className="text-base sm:text-lg text-slate-600">
-            Hành trình xây dựng portfolio này không chỉ là việc hoàn thành bài tập, mà còn là một cơ hội
-            nhìn lại và đúc kết những giá trị thực sự mình đã nhận được từ môn học.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm border border-slate-100"
-          >
-            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-slate-900">Kiến thức trọng tâm</h3>
-            <p className="text-slate-600 leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
-              Môn học đã trang bị cho mình nền tảng vững chắc về cách vận hành của thế giới số. Từ kiến trúc phần cứng máy tính
-              cho đến cách khai thác thông tin hiệu quả và nhận diện rủi ro an ninh mạng. Đặc biệt, sự bùng nổ của Trí tuệ
-              nhân tạo (AI) đã mang lại cho mình góc nhìn sâu sắc về công cụ hỗ trợ công việc tương lai.
-            </p>
-            <div className="flex flex-wrap gap-2 mt-4 sm:mt-6">
-              {['Khai thác dữ liệu', 'Ứng dụng AI', 'Bảo mật số', 'Kỹ năng cộng tác'].map(skill => (
-                <span key={skill} className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
-                  {skill}
+        <div className="bg-slate-900/90 backdrop-blur-md text-white rounded-3xl p-8 sm:p-12 border border-slate-800/80 shadow-xl shadow-slate-950/40 relative overflow-hidden group">
+          {/* Soft glowing ambient light blobs */}
+          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute -bottom-40 -left-40 w-[300px] h-[300px] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            <div className="lg:col-span-8 space-y-6">
+              <div>
+                <span className="bg-blue-500/10 text-blue-300 border border-blue-500/20 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider inline-block mb-3 backdrop-blur-xs">
+                  Tổng kết & Tự đánh giá
                 </span>
-              ))}
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                  Trải nghiệm & Sự trưởng thành của bản thân
+                </h2>
+              </div>
+              <p className="text-slate-300 text-base sm:text-lg font-light leading-relaxed max-w-3xl">
+                Hành trình xây dựng portfolio này không chỉ là việc hoàn thành bài tập, mà còn là một cơ hội nhìn lại và đúc kết những giá trị thực sự mình đã nhận được từ môn học. Mình đã học được cách kiểm chứng thông tin, tận dụng sức mạnh của AI một cách thông thái và an toàn, đồng thời rèn luyện tư duy lập trình giao diện hiện đại.
+              </p>
+              
+              <div className="flex flex-wrap gap-2.5 pt-2">
+                {['Tự Đánh Giá Năng Lực', 'Nhật Ký Hành Trình', 'Liêm Chính Học Thuật & AI', 'Kế Hoạch Tương Lai'].map(item => (
+                  <span key={item} className="bg-slate-800/50 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium border border-slate-750/50 backdrop-blur-xs">
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          </motion.div>
 
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm border border-slate-100"
-          >
-            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-slate-900">Điểm tâm đắc & Thách thức</h3>
-            <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
-              <strong>Tâm đắc nhất:</strong> Qua quá trình tự tay thiết kế và xây dựng wesbite portfolio này,
-              mình đã biến những kiến thức lý thuyết thành một sản phẩm thực tế, lưu giữ lại nỗ lực của bản thân.
-            </p>
-            <div className="h-px w-full bg-slate-100 my-3 sm:my-4"></div>
-            <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
-              <strong>Thách thức:</strong> Việc kết hợp nhịp nhàng giữa bài tập thực hành trên lớp và
-              yêu cầu thiết kế sản phẩm cuối kỳ đòi hỏi kỹ năng quản lý thời gian và quản lý thông tin ở mức cao.
-              Ngoài ra, việc tìm hiểu cách ứng dụng AI mà không vi phạm liêm chính học thuật cũng là một bài học đắt giá.
-            </p>
-          </motion.div>
+            <div className="lg:col-span-4 flex justify-start lg:justify-end">
+              <Link
+                to="/tong-ket"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-2xl shadow-lg shadow-blue-500/20 hover:-translate-y-0.5 transition-all text-sm sm:text-base cursor-pointer shrink-0"
+              >
+                Xem đánh giá chi tiết <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>
