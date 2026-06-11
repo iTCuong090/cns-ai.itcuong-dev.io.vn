@@ -3,7 +3,6 @@
 /* Smoother touch scrolling on mobile */
 html {
   -webkit-tap-highlight-color: transparent;
-  scroll-behavior: smooth;
 }
 
 /* Prevent horizontal overflow on mobile */
@@ -22,4 +21,10 @@ body {
   footer {
     padding-bottom: calc(1rem + env(safe-area-inset-bottom));
   }
+}
+
+/* Premium text selection with high contrast */
+::selection {
+  background-color: #2563eb; /* Tailwind blue-600 */
+  color: #ffffff !important;
 }

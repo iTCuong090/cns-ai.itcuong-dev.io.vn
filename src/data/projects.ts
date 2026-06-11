@@ -37,7 +37,22 @@ export const projects: Project[] = [
       "Khôi phục lại tệp tin đã xóa tạm thời từ Recycle Bin về vị trí ban đầu."
     ],
     submissionFormat: "Báo cáo thực hành chi tiết định dạng PDF ghi lại các bước kèm hình ảnh minh chứng thao tác thành công.",
-    process: `<p class="text-sm sm:text-base text-slate-600 leading-relaxed my-3 font-light">Quá trình thực hành được triển khai trực tiếp trên Windows thông qua 3 giai đoạn cốt lõi:</p><ol class="list-decimal pl-5 space-y-2 my-3 text-slate-600 text-sm sm:text-base font-light"><li class="leading-relaxed"><strong class="text-slate-800 font-semibold">Khởi tạo & Tổ chức</strong>: Định vị thư mục và thiết lập cây thư mục gốc ThucHanh_TaHuuCuong để quản lý tập trung tài nguyên.</li><li class="leading-relaxed"><strong class="text-slate-800 font-semibold">Quản trị Tệp tin</strong>: Thực hành tạo lập, đổi tên tài liệu (GhiChu.txt thành GhiChuQuanTrong.txt), tạo phân mục con TaiLieu và thực thi cơ chế sao chép (Copy) - di chuyển (Cut) để tối ưu cấu trúc dữ liệu.</li><li class="leading-relaxed"><strong class="text-slate-800 font-semibold">Quản lý Vòng đời & Phục hồi</strong>: Thực hành xóa tạm thời (Recycle Bin), xóa vĩnh viễn tệp rác bằng Shift + Delete và thực nghiệm khôi phục dữ liệu gốc để kiểm thử tính toàn vẹn.</li></ol><p class="text-sm sm:text-base text-slate-600 leading-relaxed my-3 font-light">Toàn bộ các thao tác được ghi nhận qua 19 ảnh chụp minh chứng chi tiết.</p>`,
+    process: `<p class="text-sm sm:text-base text-slate-650 leading-relaxed my-3 font-light">Quá trình thực hành được triển khai trực tiếp trên Windows thông qua 3 giai đoạn cốt lõi:</p>
+<div class="space-y-6 my-4">
+  <div>
+    <h3 class="text-base sm:text-lg font-bold text-slate-800 border-b border-slate-200/60 pb-2 uppercase tracking-wide">1. Khởi tạo & Tổ chức</h3>
+    <p class="text-sm sm:text-base text-slate-650 leading-relaxed my-2 font-light">Định vị thư mục và thiết lập cây thư mục gốc ThucHanh_TaHuuCuong để quản lý tập trung tài nguyên.</p>
+  </div>
+  <div>
+    <h3 class="text-base sm:text-lg font-bold text-slate-800 border-b border-slate-200/60 pb-2 uppercase tracking-wide">2. Quản trị Tệp tin</h3>
+    <p class="text-sm sm:text-base text-slate-650 leading-relaxed my-2 font-light">Thực hành tạo lập, đổi tên tài liệu (GhiChu.txt thành GhiChuQuanTrong.txt), tạo phân mục con TaiLieu và thực thi cơ chế sao chép (Copy) - di chuyển (Cut) để tối ưu cấu trúc dữ liệu.</p>
+  </div>
+  <div>
+    <h3 class="text-base sm:text-lg font-bold text-slate-800 border-b border-slate-200/60 pb-2 uppercase tracking-wide">3. Quản lý Vòng đời & Phục hồi</h3>
+    <p class="text-sm sm:text-base text-slate-650 leading-relaxed my-2 font-light">Thực hành xóa tạm thời (Recycle Bin), xóa vĩnh viễn tệp rác bằng Shift + Delete và thực nghiệm khôi phục dữ liệu gốc để kiểm thử tính toàn vẹn.</p>
+  </div>
+</div>
+<p class="text-sm sm:text-base text-slate-600 leading-relaxed my-3 font-light">Toàn bộ các thao tác được ghi nhận qua 19 ảnh chụp minh chứng chi tiết.</p>`,
     resultType: "Thư mục thực hành & Báo cáo PDF minh chứng",
     colSpan: 2,
     imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",

@@ -2,6 +2,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { ParticlesBackground } from "./ParticlesBackground";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion } from "motion/react";
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -53,7 +54,7 @@ export function Layout() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col selection:bg-blue-200 relative">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col relative">
       <ParticlesBackground />
       <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 border-b border-slate-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
@@ -119,7 +120,17 @@ export function Layout() {
       </div>
 
       <main className="flex-1 relative z-10">
-        <Outlet />
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 30, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ 
+            duration: 0.65, 
+            ease: [0.16, 1, 0.3, 1] 
+          }}
+        >
+          <Outlet />
+        </motion.div>
       </main>
 
       <footer className="w-full bg-slate-900 text-slate-400 py-8 sm:py-12 text-center text-sm border-t border-slate-800 relative z-10">

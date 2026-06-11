@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { createPortal } from "react-dom";
 import { useParams, Link } from "react-router-dom";
 import { projects } from "../data/projects";
@@ -38,6 +38,79 @@ export function ProjectDetail() {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [activeStepIdx, setActiveStepIdx] = useState(0);
   const [isWalkthroughOpen, setIsWalkthroughOpen] = useState(false);
+  const [tocItems, setTocItems] = useState<{ index: number; text: string; level: number }[]>([]);
+  const [activeIdx, setActiveIdx] = useState<number>(-1);
+
+  // Dynamic Table of Contents (TOC) Extraction & Scroll-spy
+  useEffect(() => {
+    if (!project) return;
+    
+    // Give content time to render in dangerouslySetInnerHTML
+    const timer = setTimeout(() => {
+      const container = document.querySelector(".project-process-html");
+      if (!container) {
+        setTocItems([]);
+        return;
+      }
+
+      // Query H3 and H4 elements inside the render container
+      const headings = container.querySelectorAll("h3, h4");
+      const items: { index: number; text: string; level: number }[] = [];
+
+      headings.forEach((heading, idx) => {
+        const text = heading.textContent || "";
+        if (!text.trim()) return;
+
+        const level = heading.tagName === "H3" ? 1 : 2;
+        items.push({
+          index: idx,
+          text: text.replace(/:$/, ""), // remove trailing colons if any
+          level
+        });
+      });
+
+      setTocItems(items);
+
+      // Set up IntersectionObserver for Scroll-spy highlighting
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const idx = Array.from(headings).indexOf(entry.target);
+              if (idx !== -1) {
+                setActiveIdx(idx);
+              }
+            }
+          });
+        },
+        {
+          rootMargin: "0px 0px -60% 0px", // Trigger when element is in upper part of screen
+          threshold: 0.1
+        }
+      );
+
+      headings.forEach((heading) => observer.observe(heading));
+
+      return () => {
+        observer.disconnect();
+      };
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [project, project?.process]);
+
+  const handleScrollTo = (index: number) => {
+    const container = document.querySelector(".project-process-html");
+    if (container) {
+      const headings = container.querySelectorAll("h3, h4");
+      const element = headings[index];
+      if (element) {
+        const yOffset = -90; // offset to account for sticky header
+        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }
+  };
 
   const isStepByStep = project?.id === "bai-1-may-tinh-va-cac-thiet-bi-ngoai-vi";
 
@@ -186,7 +259,7 @@ export function ProjectDetail() {
                 className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm"
               >
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-6">
-                  Yêu cầu chi tiết
+                  Hình ảnh minh chứng
                 </h2>
 
                 {/* Specific Layout for Bài 1: Interactive Stepper & Other Exercises: Image Viewer */}
@@ -249,7 +322,7 @@ export function ProjectDetail() {
           </div>
 
           {/* Right Column - Sidebar (Report, PDF viewer, Metadata info) */}
-          <div className="lg:col-span-4 space-y-6 sm:space-y-8">
+          <div className="lg:col-span-4 lg:self-stretch space-y-6 sm:space-y-8">
             
             {/* PDF Report Preview & Download Panel */}
             {project.pdfUrl && (
@@ -356,8 +429,91 @@ export function ProjectDetail() {
 
             </motion.div>
 
+            {/* Table of Contents Column (Sticky on large screens, outside of content card) */}
+            {tocItems.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="lg:sticky lg:top-24 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4"
+              >
+                <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-blue-600" />
+                  Mục lục nội dung
+                </h3>
+                <nav className="space-y-1.5 max-h-[50vh] overflow-y-auto pr-1">
+                  {tocItems.map((item) => (
+                    <button
+                      key={item.index}
+                      onClick={() => handleScrollTo(item.index)}
+                      className={`w-full text-left text-xs sm:text-sm py-2 px-3 rounded-xl transition-all duration-200 cursor-pointer block leading-snug border-l-2 ${
+                        item.level === 1
+                          ? "font-semibold text-slate-800"
+                          : "pl-6 text-slate-500 font-light"
+                      } ${
+                        activeIdx === item.index
+                          ? "bg-blue-50/80 text-blue-600 border-blue-500 font-bold"
+                          : "border-transparent hover:bg-slate-100/60 hover:text-slate-900"
+                      }`}
+                    >
+                      {item.text}
+                    </button>
+                  ))}
+                </nav>
+              </motion.div>
+            )}
+
           </div>
 
+        </div>
+
+        {/* Explore other projects section */}
+        <div className="mt-16 sm:mt-24 border-t border-slate-200/80 pt-12">
+          <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-8 flex items-center gap-2">
+            <BookOpen className="w-5.5 h-5.5 text-blue-600" />
+            Khám phá các dự án khác
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {projects
+              .filter((p) => p.id !== project.id)
+              .map((otherProj) => {
+                return (
+                  <Link
+                    key={otherProj.id}
+                    to={`/project/${otherProj.id}`}
+                    className="group bg-white rounded-3xl p-5 border border-slate-200/80 hover:border-blue-500/50 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="aspect-video w-full rounded-2xl overflow-hidden mb-4 bg-slate-100 relative shadow-2xs">
+                        {otherProj.imageUrl ? (
+                          <img
+                            src={otherProj.imageUrl}
+                            alt={otherProj.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-slate-400">
+                            Không có ảnh minh họa
+                          </div>
+                        )}
+                      </div>
+                      <h4 className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors text-sm sm:text-base line-clamp-2 mb-2">
+                        {otherProj.title}
+                      </h4>
+                      <p className="text-slate-500 text-xs sm:text-sm line-clamp-2 font-light leading-relaxed">
+                        {otherProj.shortDescription}
+                      </p>
+                    </div>
+                    
+                    <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-blue-600 text-xs font-semibold">
+                      <span>Xem chi tiết</span>
+                      <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                );
+              })}
+          </div>
         </div>
       </div>
 
